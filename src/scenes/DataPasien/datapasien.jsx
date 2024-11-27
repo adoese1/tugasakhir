@@ -1,49 +1,43 @@
-import React from 'react';
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataInvoices } from "../../data/mockData";
-import { useNavigate } from "react-router-dom";
+import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Invoices = () => {
+const DataPasien = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
 
+  
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "id", headerName: "No", flex: 0.17 },
+    { field: "registrarId", headerName: "Rekam Medis", flex: 0.5 },
     {
       field: "name",
       headerName: "Nama",
-      flex: 1,
+      flex: 0.75,
       cellClassName: "name-column--cell",
+    },
+    {
+      field: "age",
+      headerName: "Usia",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
     },
     {
       field: "phone",
       headerName: "Telp",
-      flex: 1,
+      flex: 0.5,
     },
     {
-      field: "resep",
-      headerName: "Resep Obat",
-      flex: 1,
-    },
-    {
-      field: "cost",
-      headerName: "Harga",
-      flex: 1,
-      renderCell: (params) => (
-        <Typography color={colors.blueAccent[500]}>
-          ${params.row.cost}
-        </Typography>
-      ),
-    },
-    {
-      field: "date",
-      headerName: "Tanggal",
+      field: "address",
+      headerName: "Alamat",
       flex: 1,
     },
     {
@@ -55,7 +49,7 @@ const Invoices = () => {
             <Button
               variant="text"
               color="secondary"
-              onClick={() => navigate("/EditInvoice", { state: { data: params.row}})}
+              onClick={() => navigate("/EditPasien", { state: { data: params.row}})}
             >
               <EditIcon />
             </Button>
@@ -85,7 +79,20 @@ const Invoices = () => {
 
   return (
     <Box m="20px">
-      <Header title="Invoice" subtitle="Daftar Invoice" />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header
+          title="Daftar Pasien"
+          subtitle="Data Lengkap Pasien"
+        />
+        <Button
+          onClick={() => navigate("/tambahdatapasien")}
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+        >
+          Tambah Data Pasien
+        </Button>
+      </Box>
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -118,15 +125,15 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid 
-            rows={mockDataInvoices}
-            columns={columns}
-            components={{ Toolbar: GridToolbar }}
+        <DataGrid
+          rows={mockDataContacts}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
   );
 };
 
-export default Invoices;
- 
+export default DataPasien;
+

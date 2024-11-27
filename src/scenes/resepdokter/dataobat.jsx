@@ -1,49 +1,48 @@
-import React from 'react';
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataInvoices } from "../../data/mockData";
-import { useNavigate } from "react-router-dom";
+import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Invoices = () => {
+const DataObat = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
 
+  
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "id", headerName: "No", flex: 0.17 },
+    { field: "registrarId", headerName: "Rekam Medis", flex: 0.5 },
     {
       field: "name",
       headerName: "Nama",
-      flex: 1,
+      flex: 0.75,
       cellClassName: "name-column--cell",
     },
     {
-      field: "phone",
-      headerName: "Telp",
+      field: "ID",
+      headerName: "ID Pasien",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "nameobat",
+      headerName: "Nama Obat",
+      flex: 0.5,
+    },
+    {
+      field: "dosage",
+      headerName: "Dosis",
       flex: 1,
     },
     {
-      field: "resep",
-      headerName: "Resep Obat",
-      flex: 1,
-    },
-    {
-      field: "cost",
-      headerName: "Harga",
-      flex: 1,
-      renderCell: (params) => (
-        <Typography color={colors.blueAccent[500]}>
-          ${params.row.cost}
-        </Typography>
-      ),
-    },
-    {
-      field: "date",
-      headerName: "Tanggal",
+      field: "frecuency",
+      headerName: "Setelah/Sebelum",
       flex: 1,
     },
     {
@@ -55,7 +54,7 @@ const Invoices = () => {
             <Button
               variant="text"
               color="secondary"
-              onClick={() => navigate("/EditInvoice", { state: { data: params.row}})}
+              onClick={() => navigate("/EditObat", { state: { data: params.row}})}
             >
               <EditIcon />
             </Button>
@@ -85,7 +84,20 @@ const Invoices = () => {
 
   return (
     <Box m="20px">
-      <Header title="Invoice" subtitle="Daftar Invoice" />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header
+          title="Daftar Obat"
+          subtitle="Data Lengkap Obat"
+        />
+        <Button
+          onClick={() => navigate("/TambahResep")}
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+        >
+          Tambah Data Obat
+        </Button>
+      </Box>
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -118,15 +130,15 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid 
-            rows={mockDataInvoices}
-            columns={columns}
-            components={{ Toolbar: GridToolbar }}
+        <DataGrid
+          rows={mockDataContacts}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
   );
 };
 
-export default Invoices;
- 
+export default DataObat;
+
