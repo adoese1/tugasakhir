@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
 const Invoices = () => {
   const theme = useTheme();
@@ -85,7 +86,20 @@ const Invoices = () => {
 
   return (
     <Box m="20px">
-      <Header title="Invoice" subtitle="Daftar Invoice" />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header
+          title="Daftar Invoice"
+          subtitle="Data Lengkap Invoice"
+        />
+        <Button
+          onClick={() => navigate("/TambahInvoice")}
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+        >
+          Tambah Data Invoice
+        </Button>
+      </Box>
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -118,10 +132,10 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid 
-            rows={mockDataInvoices}
-            columns={columns}
-            components={{ Toolbar: GridToolbar }}
+        <DataGrid
+          rows={mockDataInvoices}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
@@ -129,4 +143,3 @@ const Invoices = () => {
 };
 
 export default Invoices;
- 

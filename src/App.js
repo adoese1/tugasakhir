@@ -14,6 +14,7 @@ import EditPasien from "./scenes/Edit/editpasien";
 import EditObat from "./scenes/resepdokter/editobat";
 import TambahResep from "./scenes/resepdokter/tambahresep";
 import EditInvoice from "./scenes/invoices/editinvoice";
+import TambahInvoice from "./scenes/invoices/tambahinvoice";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -36,6 +37,7 @@ function App() {
               <Route path="/editinvoice" element={<EditInvoice />} />
               <Route path="/editobat" element={<EditObat />} />
               <Route path="/tambahresep" element={<TambahResep />} />
+              <Route path="/tambahinvoice" element={<TambahInvoice />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/calendar" element={<Calendar />} />
             </Routes>
